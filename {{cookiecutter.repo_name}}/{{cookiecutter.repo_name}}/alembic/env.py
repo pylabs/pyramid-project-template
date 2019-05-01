@@ -3,14 +3,14 @@ from alembic import context
 from pyramid.paster import get_appsettings, setup_logging
 from sqlalchemy import engine_from_config
 
-from {{ cookiecutter.repo_name }}.models.meta import Base
+from {{ cookiecutter.repo_name }}.models import BaseObject
 
 config = context.config
 
 setup_logging(config.config_file_name)
 
 settings = get_appsettings(config.config_file_name)
-target_metadata = Base.metadata
+target_metadata = BaseObject.metadata
 
 
 def run_migrations_offline():
@@ -25,7 +25,10 @@ def run_migrations_offline():
     script output.
 
     """
-    context.configure(url=settings['sqlalchemy.url'])
+    context.configure(url=settings['sqlalchemy.url'],
+                      target_metadata=target_metadata,
+                      literal_binds=True,
+                      compare_type=True)
     with context.begin_transaction():
         context.run_migrations()
 
@@ -40,10 +43,9 @@ def run_migrations_online():
     engine = engine_from_config(settings, prefix='sqlalchemy.')
 
     connection = engine.connect()
-    context.configure(
-        connection=connection,
-        target_metadata=target_metadata
-    )
+    context.configure(connection=connection,
+                      target_metadata=target_metadata,
+                      compare_type=True)
 
     try:
         with context.begin_transaction():
