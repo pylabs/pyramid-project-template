@@ -9,31 +9,29 @@ with open(os.path.join(here, 'CHANGES.txt')) as f:
     CHANGES = f.read()
 
 requires = [
-    'plaster_pastedeploy',
+    'invoke',
     'pyramid',
-    'pyramid_{{ cookiecutter.template_language }}',
+    'pyramid_beaker',
     'pyramid_debugtoolbar',
+    'pyramid_ipython',
+    'pyramid_mailer',
+    'pyramid_wtforms',
+    'pyramid_{{ cookiecutter.template_language }}',
     'waitress',
-    {%- if cookiecutter.backend == 'sqlalchemy' %}
+    'PyMySQL',
     'alembic',
     'pyramid_retry',
+    'pyramid_sqlalchemy',
     'pyramid_tm',
-    'SQLAlchemy',
-    'transaction',
-    'zope.sqlalchemy',
-    {%- elif cookiecutter.backend == 'zodb' %}
-    'pyramid_retry',
-    'pyramid_tm',
-    'pyramid_zodbconn',
-    'transaction',
-    'ZODB3',
-    {%- endif %}
 ]
 
 tests_require = [
-    'WebTest >= 1.3.1',  # py3 compat
-    'pytest >= 3.7.4',
+    'WebTest',
+    'mixer',
+    'pytest',
     'pytest-cov',
+    'pytest-mock',
+    'tox',
 ]
 
 setup(
@@ -62,10 +60,8 @@ setup(
         'paste.app_factory': [
             'main = {{ cookiecutter.repo_name }}:main',
         ],
-        {%- if cookiecutter.backend == 'sqlalchemy' %}
         'console_scripts': [
             'initialize_{{ cookiecutter.repo_name }}_db={{ cookiecutter.repo_name }}.scripts.initialize_db:main',
         ],
-        {%- endif %}
     },
 )
