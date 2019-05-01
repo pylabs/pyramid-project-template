@@ -4,7 +4,7 @@ import sys
 import shutil
 from textwrap import dedent
 
-WORKING = os.path.abspath(os.path.join(os.path.curdir))
+WORKING_DIR = os.path.abspath(os.path.join(os.path.curdir))
 
 
 def main():
@@ -17,7 +17,7 @@ def generate_random_secret():
     regex_list = [re.compile(i, re.MULTILINE) for i in secret_regex]
 
     for file_name in ['development.ini.sample', 'production.ini.sample']:
-        ini_file = os.path.join(working_dir, os.path.splitext(file_name)[0])
+        ini_file = os.path.join(WORKING_DIR, os.path.splitext(file_name)[0])
         with open(file_name) as f:
             content = f.read()
         for regex in regex_list:
