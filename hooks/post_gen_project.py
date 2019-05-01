@@ -53,7 +53,7 @@ def display_actions_message():
             %(pip_cmd)s install --upgrade pip setuptools pipenv
 
         Install the project in editable mode with its testing requirements.
-            %(pipenv_cmd)s sync --dev
+            %(pipenv_cmd)s install --dev
 
         Migrate the database using Alembic.
             # Generate your first revision.
