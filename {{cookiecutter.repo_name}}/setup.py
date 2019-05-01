@@ -16,7 +16,7 @@ requires = [
     'pyramid_ipython',
     'pyramid_mailer',
     'pyramid_wtforms',
-    'pyramid_{{ cookiecutter.template_language }}',
+    'pyramid_jinja2',
     'waitress',
     'PyMySQL',
     'alembic',
