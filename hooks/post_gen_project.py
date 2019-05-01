@@ -1,8 +1,9 @@
 import os
-import random
 import re
 import sys
+import random
 import shutil
+import string
 from textwrap import dedent
 
 WORKING_DIR = os.path.abspath(os.path.join(os.path.curdir))
