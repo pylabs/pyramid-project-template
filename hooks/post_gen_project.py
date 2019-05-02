@@ -52,7 +52,7 @@ def display_actions_message():
         pserve_cmd=os.path.join(venv_bin, 'pserve'),
         alembic_cmd=os.path.join(venv_bin, 'alembic'),
         init_cmd=os.path.join(
-            venv_bin, 'initialize_{{ cookiecutter.repo_name }}_db'),
+            venv_bin, 'initialize_db'),
     )
     msg = dedent(
         """
