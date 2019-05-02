@@ -41,7 +41,7 @@ def init_db(c, ini_file):
     """Create database and import basic data"""
 
     c.run('alembic -c {} upgrade head'.format(ini_file))
-    c.run('initialize_db {}'.format(ini_file))
+    c.run('initialize_{{ cookiecutter.repo_name }}_db {}'.format(ini_file))
 
 
 @task(delete_db, create_db)
