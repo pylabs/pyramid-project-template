@@ -16,7 +16,7 @@ def deploy(c, ini_file):
 
 
 @task
-def create_db(c, ini_file)
+def create_db(c, ini_file):
     """Create database"""
 
     # Find database name via ini file
@@ -29,7 +29,7 @@ def create_db(c, ini_file)
 
 
 @task
-def delete_db(c, ini_file)
+def delete_db(c, ini_file):
     """Delete database"""
     sqlalchemy_url = get_ini_settings(ini_file)['sqlalchemy.url']
     db_name = re.findall(r'/(\w+)\?', sqlalchemy_url)[0]
