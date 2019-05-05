@@ -1,3 +1,7 @@
 [run]
-source = {{ cookiecutter.repo_name }}
-omit = {{ cookiecutter.repo_name }}/test*
+omit = 
+    {{ cookiecutter.repo_name }}/__init__.py
+    {{ cookiecutter.repo_name }}/routes.py
+    {{ cookiecutter.repo_name }}/alembic/*
+    {{ cookiecutter.repo_name }}/models/*
+    {{ cookiecutter.repo_name }}/tests/*
