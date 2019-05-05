@@ -10,9 +10,10 @@ def deploy(c, ini_file):
     """Deploy project"""
 
     c.run('git pull origin master')
-    c.run('pipenv sync')
+    c.run('systemctl stop uwsgi')
     c.run('alembic -c {} upgrade head'.format(ini_file))
-    c.run('systemctl restart uwsgi')
+    c.run('pipenv sync')
+    c.run('systemctl start uwsgi')
 
 
 @task
