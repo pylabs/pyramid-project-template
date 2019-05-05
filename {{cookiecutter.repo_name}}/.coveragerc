@@ -1,5 +1,5 @@
 [run]
-omit = 
+omit =
     {{ cookiecutter.repo_name }}/__init__.py
     {{ cookiecutter.repo_name }}/routes.py
     {{ cookiecutter.repo_name }}/alembic/*
