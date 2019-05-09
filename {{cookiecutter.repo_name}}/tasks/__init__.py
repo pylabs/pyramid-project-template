@@ -3,6 +3,7 @@ import re
 from invoke import Collection, task
 
 from {{ cookiecutter.repo_name }}.tests.helper import get_ini_settings, import_test_db_data
+
 from . import db, test
 
 
@@ -18,3 +19,4 @@ def deploy(c, ini_file):
 
 
 namespace = Collection(deploy, db, test)
+
