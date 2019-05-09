@@ -26,7 +26,7 @@ def generate_random_secret():
             random_string = ''.join(random.SystemRandom()
                                           .choice(string.ascii_lowercase
                                                   + string.digits)
-                                    for _ in range(50))
+                                    for _ in range(64))
             content = regex.sub(r'\1 = {}'.format(random_string), content)
         with open(ini_file, 'w') as f:
             f.write(content)
