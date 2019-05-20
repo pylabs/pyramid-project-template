@@ -19,7 +19,10 @@ def import_test_db_data(ini_file_path):
     Session = sessionmaker(bind=engine)
     mixer = Mixer(session=Session(), commit=True, locale='zh_TW')
 
-    # mixer.blend('{{ cookiecutter.repo_name }}.models.mymodel', id=1, name='foo', value=1)
+    # mixer.blend('{{ cookiecutter.repo_name }}.models.mymodel',
+    #             id=1,
+    #             name=lambda: mixer.faker.name(),
+    #             value=lambda: mixer.faker.random_number(digits=5, fix_len=True))
 
     # with mixer.ctx(commit=False):
     #     session = Session()
