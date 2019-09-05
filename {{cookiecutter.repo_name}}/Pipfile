@@ -4,20 +4,20 @@ name = "pypi"
 verify_ssl = true
 
 [packages]
+alembic = "*"
 invoke = "*"
 pyramid = "*"
 pyramid_beaker = "*"
-pyramid_mailer = "*"
-pyramid_wtforms = "*"
 pyramid_jinja2 = "*"
-PyMySQL = "*"
-alembic = "*"
+pyramid_mailer = "*"
 pyramid_retry = "*"
 pyramid_sqlalchemy = "*"
 pyramid_tm = "*"
+pyramid_wtforms = "*"
+PyMySQL = "*"
 
 [dev-packages]
-"autopep8" = "*"
+autopep8 = "*"
 flake8 = "*"
 mixer = "*"
 pyramid_debugtoolbar = "*"
@@ -27,6 +27,6 @@ pytest-cov = "*"
 pytest-mock = "*"
 rope = "*"
 tox = "*"
-WebTest = "*"
 waitress = "*"
 {{ cookiecutter.repo_name }} = {path = ".",editable = true}
+WebTest = "*"
