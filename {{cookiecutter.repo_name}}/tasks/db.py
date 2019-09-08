@@ -42,7 +42,7 @@ def db_delete(c, ini_file=None):
     c.run('sudo mysql -uroot -e "DROP DATABASE IF EXISTS {}"'.format(db_name))
 
 
-@task(db_delete, db_create, name='init', optional=['ini_file'])
+@task(db_create, name='init', optional=['ini_file'])
 def init_db(c, ini_file=None):
     """Create database and import basic data"""
 
