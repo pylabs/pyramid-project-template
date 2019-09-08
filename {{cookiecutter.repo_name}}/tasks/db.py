@@ -1,3 +1,4 @@
+import os
 import re
 
 from invoke import task
@@ -15,7 +16,7 @@ def find_ini_file():
 
 
 @task(name='create', optional=['ini_file'])
-def db_create(c, ini_file=None):
+def create_db(c, ini_file=None):
     """Create database"""
 
     if ini_file is None:
@@ -31,7 +32,7 @@ def db_create(c, ini_file=None):
 
 
 @task(name='delete', optional=['ini_file'])
-def db_delete(c, ini_file=None):
+def delete_db(c, ini_file=None):
     """Delete database"""
 
     if ini_file is None:
@@ -42,7 +43,7 @@ def db_delete(c, ini_file=None):
     c.run('sudo mysql -uroot -e "DROP DATABASE IF EXISTS {}"'.format(db_name))
 
 
-@task(db_create, name='init', optional=['ini_file'])
+@task(create_db, name='init', optional=['ini_file'])
 def init_db(c, ini_file=None):
     """Create database and import basic data"""
 
@@ -53,7 +54,7 @@ def init_db(c, ini_file=None):
     c.run('initialize_{{ cookiecutter.repo_name }}_db {}'.format(ini_file))
 
 
-@task(db_delete, db_create, name='init-test', optional=['ini_file'])
+@task(delete_db, create_db, name='init-test', optional=['ini_file'])
 def init_test_db(c, ini_file=None):
     """Create database and import test data"""
 
