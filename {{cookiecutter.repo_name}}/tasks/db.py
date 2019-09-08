@@ -25,14 +25,14 @@ def db_delete(c, ini_file):
     c.run('sudo mysql -uroot -e "DROP DATABASE IF EXISTS {}"'.format(db_name))
 
 
-@task(db_create, name='init')
+@task(name='init')
 def init_db(c, ini_file):
     """Create database and import basic data"""
     c.run('alembic -c {} upgrade head'.format(ini_file))
     c.run('initialize_{{ cookiecutter.repo_name }}_db {}'.format(ini_file))
 
 
-@task(db_delete, db_create, name='init-test')
+@task(name='init-test')
 def init_test_db(c, ini_file):
     """Create database and import test data"""
     c.run('alembic -c {} upgrade head'.format(ini_file))
