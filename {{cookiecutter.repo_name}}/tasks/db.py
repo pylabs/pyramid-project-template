@@ -49,7 +49,10 @@ def delete_db(c, ini_file=None):
         c.run('sudo mysql -uroot -e "DROP DATABASE IF EXISTS {}"'.format(db_name))
     elif sqlalchemy_url.startswith('sqlite'):
         db_path = re.findall(r'sqlite:///(.+)', sqlalchemy_url)[0]
-        os.remove(db_path)
+        if '%(here)s' in db_path:
+            os.remove(db_path.split('/')[-1])
+        else:
+            os.remove(db_path)
     else:
         raise NotImplementedError()
 
