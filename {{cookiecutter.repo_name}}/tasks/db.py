@@ -6,15 +6,6 @@ from invoke import task
 from {{ cookiecutter.repo_name }}.tests.helper import get_ini_settings, import_test_db_data
 
 
-def find_ini_file():                                                                                                                            
-    if os.path.exists('production.ini'):                                                                                                        
-        return 'production.ini'                                                                                                                 
-    elif os.path.exists('development.ini'):                                                                                                     
-        return 'development.ini'                                                                                                                
-    else:                                                                                                                                       
-        raise ParseError('--ini-file should be valid file path')
-
-
 @task(name='create', optional=['ini_file'])
 def create_db(c, ini_file=None):
     """Create database"""
