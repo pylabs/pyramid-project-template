@@ -1,7 +1,5 @@
 from invoke import Collection, task
 
-from {{ cookiecutter.repo_name }}.tests.helper import get_ini_settings, import_test_db_data
-
 from . import db, test
 from .helper import find_ini_file
 
