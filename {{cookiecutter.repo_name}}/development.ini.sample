@@ -80,7 +80,7 @@ handlers =
 qualname = {{ cookiecutter.repo_name }}
 
 [logger_sqlalchemy]
-level = WARN
+level = INFO
 handlers =
 qualname = sqlalchemy.engine
 # "level = INFO" logs SQL queries.
