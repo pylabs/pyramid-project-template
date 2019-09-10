@@ -4,6 +4,7 @@ import re
 from invoke import task
 
 from {{ cookiecutter.repo_name }}.tests.helper import get_ini_settings, import_test_db_data
+from .helper import find_ini_file
 
 
 @task(name='create', optional=['ini_file'])
