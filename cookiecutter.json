@@ -1,5 +1,7 @@
 {
     "project_name": "Pyramid Scaffold",
+    "project_version": "Project Version",
+    "author_info": "Your Name <name@email.address>",
     "repo_name": "{{cookiecutter.project_name.lower().strip().replace(' ', '_').replace(':', '_').replace('-', '_').replace('!', '_')}}",
     "_copy_without_render": [
         "static/*"
