@@ -11,4 +11,3 @@ def test_all(c):
 def test_gen_cov(c):
     """Generate test coverage"""
     c.run('pytest --cov={{ cookiecutter.repo_name }}')
-
