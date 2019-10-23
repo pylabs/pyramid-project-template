@@ -13,8 +13,8 @@ def deploy(c, ini_file=None):
 
     c.run('git pull origin master')
     c.run('systemctl stop uwsgi')
-    c.run('alembic -c {} upgrade head'.format(ini_file))
-    c.run('pipenv sync')
+    c.run(f'alembic -c {ini_file} upgrade head')
+    c.run('poetry install')
     c.run('systemctl start uwsgi')
 
 

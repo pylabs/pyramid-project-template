@@ -14,11 +14,11 @@ Getting Started
 
 - Upgrade packaging tools.
 
-    .venv/bin/pip install --upgrade pip setuptools pipenv
+    .venv/bin/pip install --upgrade pip setuptools poetry
 
 - Install the project in editable mode with its testing requirements.
 
-    .venv/bin/pipenv sync --dev
+    .venv/bin/poetry install
 
 - Initialize and upgrade the database using Alembic.
 

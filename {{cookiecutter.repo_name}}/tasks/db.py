@@ -20,12 +20,12 @@ def create_db(c, ini_file=None):
     if sqlalchemy_url.startswith('mysql'):
         db_name = re.findall(r'/(\w+)\?', sqlalchemy_url)[0]
         db_user, db_pass = re.findall(r'//(\w+):(\w+)@', sqlalchemy_url)[0]
-        c.run('sudo mysql -uroot -e "CREATE DATABASE IF NOT EXISTS {} '
-              'CHARSET utf8mb4"'.format(db_name))
-        c.run('sudo mysql -uroot -e "CREATE USER {0}@localhost '
-              'IDENTIFIED BY \'{1}\'"'.format(db_user, db_pass))
-        c.run('sudo mysql -uroot -e "GRANT ALL ON {0}.* '
-              'TO {1}@localhost'.format(db_name, db_user))
+        c.run(f'sudo mysql -uroot -e "CREATE DATABASE IF NOT EXISTS {db_name} '
+              'CHARSET utf8mb4"')
+        c.run(f'sudo mysql -uroot -e "CREATE USER {db_user}@localhost '
+              f'IDENTIFIED BY \'{db_pass}\'"')
+        c.run(f'sudo mysql -uroot -e "GRANT ALL ON {db_name}.* '
+              f'TO {db_user}@localhost')
     elif sqlalchemy_url.startswith('sqlite'):
         print('SQLite do not need to create db first, '
               'run invoke db.init directly')
@@ -44,7 +44,7 @@ def delete_db(c, ini_file=None):
     if sqlalchemy_url.startswith('mysql'):
         db_name = re.findall(r'/(\w+)\?', sqlalchemy_url)[0]
         c.run('sudo mysql -uroot -e "DROP DATABASE '
-              'IF EXISTS {}"'.format(db_name))
+              f'IF EXISTS {db_name}"')
     elif sqlalchemy_url.startswith('sqlite'):
         db_path = re.findall(r'sqlite:///(.+)', sqlalchemy_url)[0]
         if '%(here)s' in db_path:
@@ -62,8 +62,8 @@ def init_db(c, ini_file=None):
     if ini_file is None:
         ini_file = find_ini_file()
 
-    c.run('alembic -c {} upgrade head'.format(ini_file))
-    c.run('initialize_{{ cookiecutter.repo_name }}_db {}'.format(ini_file))
+    c.run(f'alembic -c {ini_file} upgrade head')
+    c.run(f'initialize_{{ cookiecutter.repo_name }}_db {ini_file}')
 
 
 @task(delete_db, create_db, name='init-test', optional=['ini_file'])
@@ -73,5 +73,5 @@ def init_test_db(c, ini_file=None):
     if ini_file is None:
         ini_file = find_ini_file()
 
-    c.run('alembic -c {} upgrade head'.format(ini_file))
+    c.run(f'alembic -c {ini_file} upgrade head')
     import_test_db_data(ini_file)

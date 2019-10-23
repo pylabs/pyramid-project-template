@@ -27,7 +27,7 @@ def generate_random_secret():
                                           .choice(string.ascii_lowercase
                                                   + string.digits)
                                     for _ in range(64))
-            content = regex.sub(r'\1 = {}'.format(random_string), content)
+            content = regex.sub(rf'\1 = {random_string}', content)
         with open(ini_file, 'w') as f:
             f.write(content)
 
@@ -47,7 +47,7 @@ def display_actions_message():
         venv=venv,
         venv_cmd=venv_cmd,
         pip_cmd=os.path.join(venv_bin, 'pip'),
-        pipenv_cmd=os.path.join(venv_bin, 'pipenv'),
+        poetry_cmd=os.path.join(venv_bin, 'poetry'),
         pytest_cmd=os.path.join(venv_bin, 'pytest'),
         pserve_cmd=os.path.join(venv_bin, 'pserve'),
         alembic_cmd=os.path.join(venv_bin, 'alembic'),
@@ -71,10 +71,10 @@ def display_actions_message():
             %(venv_cmd)s %(venv)s
 
         Upgrade packaging tools.
-            %(pip_cmd)s install --upgrade pip setuptools pipenv
+            %(pip_cmd)s install --upgrade pip setuptools poetry
 
         Install the project in editable mode with its testing requirements.
-            %(pipenv_cmd)s install --dev
+            %(poetry_cmd)s install
 
         Migrate the database using Alembic.
             # Generate your first revision.
