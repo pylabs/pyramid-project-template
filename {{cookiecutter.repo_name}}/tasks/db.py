@@ -3,7 +3,8 @@ import re
 
 from invoke import task
 
-from {{ cookiecutter.repo_name }}.tests.helper import get_ini_settings, import_test_db_data
+from {{ cookiecutter.repo_name }}.tests.helper import (get_ini_settings,
+                                                       import_test_db_data)
 from .helper import find_ini_file
 
 
@@ -19,11 +20,15 @@ def create_db(c, ini_file=None):
     if sqlalchemy_url.startswith('mysql'):
         db_name = re.findall(r'/(\w+)\?', sqlalchemy_url)[0]
         db_user, db_pass = re.findall(r'//(\w+):(\w+)@', sqlalchemy_url)[0]
-        c.run('sudo mysql -uroot -e "CREATE DATABASE IF NOT EXISTS {} CHARSET utf8mb4"'.format(db_name))
-        c.run('sudo mysql -uroot -e "GRANT ALL ON {0}.* to {1}@localhost '
-              'IDENTIFIED BY \'{2}\'"'.format(db_name, db_user, db_pass))
+        c.run('sudo mysql -uroot -e "CREATE DATABASE IF NOT EXISTS {} '
+              'CHARSET utf8mb4"'.format(db_name))
+        c.run('sudo mysql -uroot -e "CREATE USER {0}@localhost '
+              'IDENTIFIED BY \'{1}\'"'.format(db_user, db_pass))
+        c.run('sudo mysql -uroot -e "GRANT ALL ON {0}.* '
+              'TO {1}@localhost'.format(db_name, db_user))
     elif sqlalchemy_url.startswith('sqlite'):
-        print('SQLite do not need to create db first, run invoke db.init directly')
+        print('SQLite do not need to create db first, '
+              'run invoke db.init directly')
     else:
         raise NotImplementedError()
 
@@ -38,7 +43,8 @@ def delete_db(c, ini_file=None):
     sqlalchemy_url = get_ini_settings(ini_file)['sqlalchemy.url']
     if sqlalchemy_url.startswith('mysql'):
         db_name = re.findall(r'/(\w+)\?', sqlalchemy_url)[0]
-        c.run('sudo mysql -uroot -e "DROP DATABASE IF EXISTS {}"'.format(db_name))
+        c.run('sudo mysql -uroot -e "DROP DATABASE '
+              'IF EXISTS {}"'.format(db_name))
     elif sqlalchemy_url.startswith('sqlite'):
         db_path = re.findall(r'sqlite:///(.+)', sqlalchemy_url)[0]
         if '%(here)s' in db_path:
@@ -69,4 +75,3 @@ def init_test_db(c, ini_file=None):
 
     c.run('alembic -c {} upgrade head'.format(ini_file))
     import_test_db_data(ini_file)
-
