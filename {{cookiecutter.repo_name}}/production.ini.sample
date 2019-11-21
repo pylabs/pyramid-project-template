@@ -95,7 +95,7 @@ qualname = exc_logger
 
 [handler_file]
 class = FileHandler
-args = ('%(here)s/logs/log.log',)
+args = ('%(here)s/logs/{{ cookiecutter.repo_name }}.log',)
 level = NOTSET
 formatter = generic
 
