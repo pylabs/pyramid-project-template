@@ -72,12 +72,12 @@ handlers = file
 
 [logger_{{ cookiecutter.repo_name }}]
 level = WARN
-handlers =
+handlers = file
 qualname = {{ cookiecutter.repo_name }}
 
 [logger_sqlalchemy]
 level = WARN
-handlers =
+handlers = file
 qualname = sqlalchemy.engine
 # "level = INFO" logs SQL queries.
 # "level = DEBUG" logs SQL queries and results.
@@ -85,7 +85,7 @@ qualname = sqlalchemy.engine
 
 [logger_alembic]
 level = WARN
-handlers =
+handlers = file
 qualname = alembic
 
 [logger_exc_logger]
