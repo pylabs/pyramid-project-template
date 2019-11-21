@@ -17,6 +17,7 @@ alembic = "*"
 pyramid_retry = "*"
 pyramid_sqlalchemy = "*"
 pyramid_tm = "*"
+pyramid_exclog = "*"
 
 [tool.poetry.dev-dependencies]
 autopep8 = "*"
