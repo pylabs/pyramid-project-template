@@ -2,7 +2,7 @@
 pyramid-cookiecutter-starter
 ============================
 
-.. image:: https://travis-ci.org/Pylons/pyramid-cookiecutter-starter.png?branch=latest
+.. image:: https://travis-ci.org/Pylons/pyramid-cookiecutter-starter.png?branch=master
         :target: https://travis-ci.org/Pylons/pyramid-cookiecutter-starter
         :alt: Master Travis CI Status
 
@@ -17,7 +17,7 @@ Customizable options upon install include choice of:
 Requirements
 ------------
 
-* Python 3.4+
+* Python 3.5+
 * `cookiecutter <https://cookiecutter.readthedocs.io/en/latest/installation.html>`_
 
 Versions
